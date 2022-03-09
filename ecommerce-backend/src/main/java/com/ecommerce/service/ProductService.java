@@ -2,6 +2,7 @@ package com.ecommerce.service;
 
 import com.ecommerce.DAO.ProductRepository;
 import com.ecommerce.domain.Product;
+import com.ecommerce.errorHandler.EcommerceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,10 @@ public class ProductService {
         return productList;
     }
 
+    public Double getPrice(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(
+                ()-> new EcommerceNotFoundException("The product with id " + productId + " doesn't exist.")
+        );
+        return product.getPrice();
+    }
 }

@@ -1,12 +1,10 @@
 package com.ecommerce.domain;
 
+import com.ecommerce.domain.strategy.Category;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -26,15 +24,19 @@ public class Product {
 
     public String image;
 
+    @ManyToOne
+    public Category category;
+
     public Product() {
     }
 
-    public Product(String name, String description, Double price, Integer stock, String image) {
+    public Product(String name, String description, Double price, Integer stock, String image,Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
         this.image = image;
+        this.category = category;
     }
 
     @Override
@@ -46,5 +48,9 @@ public class Product {
                 ", price=" + price +
                 ", stock=" + stock +
                 '}';
+    }
+
+    public Double getPrice() {
+        return category.discount(this.price);
     }
 }
