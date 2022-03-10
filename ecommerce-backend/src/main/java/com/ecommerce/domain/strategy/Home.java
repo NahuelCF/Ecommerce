@@ -7,6 +7,17 @@ import java.util.Map;
 @Entity
 @DiscriminatorValue("Home")
 public class Home extends Category {
+
+    public Home(Integer day, Integer timeFrom,Integer timeTo) {
+        this.day = day;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+    }
+
+    public Home() {
+
+    }
+
     @Override
     public Double discount(Double price) {
         Map<String, Integer> dayAndTime = Utils.getDayAndTime();
@@ -19,10 +30,6 @@ public class Home extends Category {
 
     @Override
     public Boolean correctDayAndTime(Map<String, Integer> dayAndTime) {
-        //TODO: hacer el dia y hora un atributo
-        System.out.print("HOME");
-        System.out.print("DAY: " + dayAndTime.get("day").equals(2));
-        System.out.print("TIME: " + Utils.between(dayAndTime.get("time"),20,22));
-        return dayAndTime.get("day").equals(2) && Utils.between(dayAndTime.get("time"),20,22);
+        return dayAndTime.get("day").equals(day) && Utils.between(dayAndTime.get("time"),timeFrom,timeTo);
     }
 }

@@ -37,7 +37,7 @@ public class Bootstrap implements InitializingBean {
     }
 
     private void createCategories(){
-        home = new Home();
+        home = new Home(2,20,22);
         categoryRepository.save(home);
     }
 

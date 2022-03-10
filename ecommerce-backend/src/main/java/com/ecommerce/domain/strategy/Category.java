@@ -11,6 +11,12 @@ public abstract class Category {
     @GeneratedValue
     private Long id;
 
+    Integer day;
+
+    Integer timeFrom;
+
+    Integer timeTo;
+
     public Double discount(Double price){
         return price;
     };
