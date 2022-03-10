@@ -23,6 +23,12 @@ public class ProductController {
         return productService.allProducts();
     }
 
+    @GetMapping("/getProduct/{productId}")
+    @ApiOperation("Return a product")
+    Product getProduct(@PathVariable Long productId) {
+        return productService.getProduct(productId);
+    }
+
     @GetMapping("/getPrice/{productId}")
     @ApiOperation("Return all products in database")
     Double getPrice(@PathVariable Long productId) {

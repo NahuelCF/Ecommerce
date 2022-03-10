@@ -21,10 +21,15 @@ public class ProductService {
         return productList;
     }
 
-    public Double getPrice(Long productId) {
+    public Product getProduct(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(
                 ()-> new EcommerceNotFoundException("The product with id " + productId + " doesn't exist.")
         );
+        return product;
+    }
+
+    public Double getPrice(Long productId) {
+        Product product = getProduct(productId);
         return product.getPrice();
     }
 }
