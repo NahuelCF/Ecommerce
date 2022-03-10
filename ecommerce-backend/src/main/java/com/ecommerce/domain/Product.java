@@ -27,16 +27,19 @@ public class Product {
     @ManyToOne
     public Category category;
 
+    public boolean active;
+
     public Product() {
     }
 
-    public Product(String name, String description, Double price, Integer stock, String image,Category category) {
+    public Product(String name, String description, Double price, Integer stock, String image,Category category, boolean active) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
         this.image = image;
         this.category = category;
+        this.active = active;
     }
 
     @Override
