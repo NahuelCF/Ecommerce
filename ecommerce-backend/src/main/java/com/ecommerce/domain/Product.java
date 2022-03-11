@@ -3,12 +3,14 @@ package com.ecommerce.domain;
 import com.ecommerce.domain.strategy.Category;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@SQLDelete(sql = "UPDATE product SET active = false WHERE id = ?")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

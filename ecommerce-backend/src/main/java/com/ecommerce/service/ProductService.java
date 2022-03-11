@@ -17,7 +17,7 @@ public class ProductService {
 
     public List<Product> allProducts() {
         var productList = new ArrayList<Product>();
-        productRepository.findAll().forEach(product -> productList.add(product));
+        productRepository.findByActive(true).forEach(product -> productList.add(product));
         return productList;
     }
 
@@ -31,5 +31,11 @@ public class ProductService {
     public Double getPrice(Long productId) {
         Product product = getProduct(productId);
         return product.getPrice();
+    }
+
+    public String deleteProduct(Long productId) {
+        Product product = getProduct(productId);
+        productRepository.deleteById(productId);
+        return "Product successfully deleted!";
     }
 }
