@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import java.util.Map;
 
 @Entity
-@DiscriminatorValue("Home")
 public class Home extends Category {
 
     public Home(Integer day, Integer timeFrom,Integer timeTo) {
