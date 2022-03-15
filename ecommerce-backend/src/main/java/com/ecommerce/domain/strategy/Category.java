@@ -1,11 +1,16 @@
 package com.ecommerce.domain.strategy;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 import java.util.Map;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "CategoryType")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Home.class, name = "home")
+})
 public abstract class Category {
     @Id
     @GeneratedValue
@@ -19,8 +24,8 @@ public abstract class Category {
 
     public Double discount(Double price){
         return price;
-    };
+    }
     Boolean correctDayAndTime(Map<String,Integer> dayAndTime){
         return false;
-    };
+    }
 }
