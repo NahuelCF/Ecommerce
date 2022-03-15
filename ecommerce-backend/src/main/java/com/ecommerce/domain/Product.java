@@ -1,6 +1,8 @@
 package com.ecommerce.domain;
 
 import com.ecommerce.domain.strategy.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -27,7 +29,13 @@ public class Product {
     public String image;
 
     @ManyToOne
+    @JsonIgnore
     public Category category;
+
+    @JsonProperty("categoryID")
+    public Long getCategoryId() {
+        return this.category.id;
+    }
 
     public boolean active;
 

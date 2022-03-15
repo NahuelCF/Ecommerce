@@ -14,7 +14,7 @@ import java.util.Map;
 public abstract class Category {
     @Id
     @GeneratedValue
-    private Long id;
+    public Long id;
 
     Integer day;
 
