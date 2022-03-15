@@ -32,6 +32,12 @@ public class ProductController {
         return productService.deleteProduct(productId);
     }
 
+    @PutMapping("/updateProduct/{productId}/{categoryId}")
+    @ApiOperation("Update a product")
+    String updateProduct(@PathVariable Long productId, @RequestBody Product product, @PathVariable Long categoryId){
+        return productService.updateProduct(productId, product, categoryId);
+    }
+
     @GetMapping("/getPrice/{productId}")
     @ApiOperation("Return all products in database")
     Double getPrice(@PathVariable Long productId) {

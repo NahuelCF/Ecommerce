@@ -15,6 +15,9 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    CategoryService categoryService;
+
     public List<Product> allProducts() {
         var productList = new ArrayList<Product>();
         productRepository.findByActive(true).forEach(product -> productList.add(product));
@@ -22,10 +25,9 @@ public class ProductService {
     }
 
     public Product getProduct(Long productId) {
-        Product product = productRepository.findById(productId).orElseThrow(
+        return productRepository.findById(productId).orElseThrow(
                 ()-> new EcommerceNotFoundException("The product with id " + productId + " doesn't exist.")
         );
-        return product;
     }
 
     public Double getPrice(Long productId) {
@@ -37,5 +39,13 @@ public class ProductService {
         Product product = getProduct(productId);
         productRepository.deleteById(productId);
         return "Product successfully deleted!";
+    }
+
+    public String updateProduct(Long productId, Product product, Long categoryId) {
+        Product oldProduct = getProduct(productId);
+        product.id = productId;
+        product.category = categoryService.getCategory(categoryId);
+        productRepository.save(product);
+        return "Product successfully updated!";
     }
 }
