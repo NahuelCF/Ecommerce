@@ -39,8 +39,9 @@ public class ProductController {
     }
 
     @GetMapping("/getPrice/{productId}")
-    @ApiOperation("Return all products in database")
+    @ApiOperation("Return the price of a product, it might have a discount")
     Double getPrice(@PathVariable Long productId) {
         return productService.getPrice(productId);
     }
+
 }
